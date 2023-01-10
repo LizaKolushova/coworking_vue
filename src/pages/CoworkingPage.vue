@@ -51,13 +51,13 @@
                         value="4"
                     ></v-rating>
                     <v-card-actions>
-                    <v-btn color="teal lighten-2" block elevation="1" x-large> 
+                    
                     <router-link 
                         :to="{
                         name: 'placeId',
                         params: { id: place.id},
-                        }" class="white--text"
-                    >Тарифы</router-link> </v-btn>
+                        }" 
+                    > <v-btn color="teal lighten-2" block elevation="1" x-large class="white--text"> Тарифы </v-btn></router-link> 
                     </v-card-actions>
                 </v-col>
                 </v-card>

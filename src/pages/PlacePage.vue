@@ -1,23 +1,31 @@
 <template>
     <v-container>
-      <div>
-        <!-- <h2 class="article__title">{{ article.name }}</h2>
-      <img class="article__image" :src="'images/' + article.full_image" :alt="article.name" /> -->
-        <v-img
-          class="white--text align-end article__image"
-          :src="'images/' + article.full_image"
-          max-height="400"
-        >
-          <p
-            class="card__title text-center text-h3 font-weight-medium"
-            style="background-color: rgb(0, 0, 0, 0.4)"
-          >
-            {{ article.name }}
-          </p>
-        </v-img>
-        <p class="article__date">{{ article.date }}</p>
-        <p class="article__desc">{{ article.desc }}</p>
+    <section class="section-place">
+    <div class="container section-about__container">
+        <h1 class="section-about__title section-title">{{ coworking.title }}</h1>
+        <div>
+        <p class="article__desc">{{ coworking.description }}</p>
       </div>
+        <v-row class="g-3" rows="3">    
+                <v-card
+                    class="mx-auto card d-flex"
+                    width="25rem"
+                    v-for="rate in place"
+                    :key="rate.id"
+                    style="margin-bottom: 14px"
+                >
+                <v-col class="sm p-3 g-3">
+                    <v-img class="white--text align-end" height="250" :src="rate.photo" alt="rate.title" >
+                    </v-img>
+                    <v-card-title class="card__title">{{ rate.title }}</v-card-title>
+                    <v-card-subtitle class="card__subtitle text--secondary" >{{ rate.type }}</v-card-subtitle>
+                </v-col>
+                </v-card>
+           
+        </v-row>
+        </div>        
+        
+    </section> 
   
       <v-list three-line>
         <div v-for="comment in comments" :key="comment.id">
@@ -71,12 +79,14 @@
     // },
     // props: ['article'],
     created: function () {
-      this.getArticle();
+      this.getCoworking();
+      this.getRate();
     },
     data: function () {
       return {
-        articleId: this.$route.params.id,
-        article: {},
+        placeId: this.$route.params.id,
+        coworking: {},
+        place:[],
         commentFormValid: false,
         commentRules: [
           (v) =>
@@ -108,15 +118,27 @@
       };
     },
     methods: {
-      getArticle: function () {
+      getCoworking: function () {
         axios
-          .get("/articles.json")
+          .get("/coworking.json")
           .then((response) => {
-            // for(let i=0;i<response.data.length;i++)
-            // console.log(response.data);
             response.data.forEach((element) => {
-              if (element.id == this.articleId) {
-                this.article = element;
+              if (element.id == this.placeId) {
+                this.coworking = element;
+              }
+            });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
+      getRate: function () {
+        axios
+          .get("/rate.json")
+          .then((response) => {
+            response.data.forEach((element) => {
+              if (element.place_id == this.placeId) {
+                this.place = response.data;
               }
             });
           })
@@ -131,22 +153,4 @@
   };
   </script>
   
-  <style lang="scss" scoped>
-  .article {
-    width: 65%;
-    margin: 0 auto;
-    //&__title {
-    //font-size: 3rem;
-    //text-align: center;
-    //}
-    &__date {
-      text-align: right;
-      color: rgba(0, 0, 0, 0.386);
-    }
-    &__image {
-      width: 100%;
-      margin: 1rem 0;
-    }
-  }
-  </style>
   

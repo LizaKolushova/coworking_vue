@@ -24,8 +24,6 @@
                       <router-link to="/profile" class="menu__link black--text" >Профиль</router-link>
                     </li>
                 </ul>
-
-
             </nav>
             <v-form>
               <v-text-field
@@ -121,47 +119,6 @@ export default {
     // ArticlesPage,
   },
 };
-
-
-
-
-
 </script>
 
-<style media="print">
-@page {
-    size: A4;
-    margin: 1cm;
-}
 
-@media print {
-    *,
-    *::before,
-    *::after {
-      background: #fff !important;
-      color: #000 !important;
-      /* Black prints faster */
-      box-shadow: none !important;
-      text-shadow: none !important;
-    }
-
-    img, .card {
-        page-break-inside: avoid;
-    }  
-    .img-fluid{
-        display: none;
-    }
-    body>*:not(main) {
-        display: none;
-    }
-
-    a,
-    a:visited {
-        text-decoration: underline;
-    }
-
-    a[href]::after {
-        content: "(" attr(href) ")";
-    }
-}
-</style> 

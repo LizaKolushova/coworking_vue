@@ -15,7 +15,7 @@ Vue.use(VueRouter)
 Vue.use(vuetify)
 // Vue.use(BootstrapVue)
 
-import helloWorld from './components/HelloWorld.vue'
+
 import mainPage from './pages/MainPage.vue'
 import coworkingPages from './pages/CoworkingPage.vue'
 import placePages from './pages/PlacePage.vue'
@@ -27,7 +27,6 @@ import aboutUs from './pages/AboutUs.vue'
 Vue.config.productionTip = false
 
 const routes = [
-    { path: '/hello', component: helloWorld },
   { path: '/', component: mainPage },
   { path: '/coworking', component: coworkingPages },
   { path: '/coworking/:id', component: placePages, name: 'placeId', props: true  },
