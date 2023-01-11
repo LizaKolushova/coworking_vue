@@ -15,7 +15,7 @@
                       <router-link to="/" class="menu__link black--text">Главная</router-link>
                     </li>
                     <li class="menu__item">
-                      <router-link to="/coworking" class="menu__link black--text">Коворгинги</router-link>
+                      <router-link to="/coworking" class="menu__link black--text">Коворкинги</router-link>
                     </li>
                     <li class="menu__item">
                       <router-link to="/about" class="menu__link black--text" >About</router-link>
