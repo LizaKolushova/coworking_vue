@@ -18,10 +18,16 @@
                       <router-link to="/coworking" class="menu__link black--text">Коворгинги</router-link>
                     </li>
                     <li class="menu__item">
-                      <router-link to="/about" class="menu__link black--text" >О нас</router-link>
+                      <router-link to="/about" class="menu__link black--text" >About</router-link>
                     </li>
                     <li class="menu__item">
                       <router-link to="/profile" class="menu__link black--text" >Профиль</router-link>
+                    </li>
+                    <li class="menu__item">
+                      <a href="https://gitlab.com/e.s.kolushova/3sem-coworking-vue" class="menu__link black--text">Git</a>
+                    </li>
+                    <li class="menu__item">
+                      <a href="coworking.json" class="menu__link black--text">Json</a>
                     </li>
                 </ul>
             </nav>

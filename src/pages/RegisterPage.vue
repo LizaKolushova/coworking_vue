@@ -5,6 +5,7 @@
             ref="registerForm"
             v-model="registerFormValid"
             class="pa-4 pt-6 text-center"
+            action="https://httpbin.org/post" method="post"
           >
             <v-text-field
             background-color="transparent"

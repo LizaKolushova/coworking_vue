@@ -4,7 +4,7 @@
     <div class="container section-about__container">
         <h1 class="section-about__title section-title">{{ coworking.title }}</h1>
         <div>
-        <p class="article__desc">{{ coworking.description }}</p>
+        <p class="text--primary" style="margin-bottom:30px">{{ coworking.description }}</p>
       </div>
         <v-row class="g-3" rows="3">    
                 <v-card
@@ -28,12 +28,7 @@
     </section> 
   
       <v-list three-line>
-        <div v-for="comment in comments" :key="comment.id">
-          <!-- <v-subheader :key="comment.author.name">{{
-            comment.author.name
-          }}</v-subheader> -->
-  
-          <!-- <v-divider :key="comment.id" inset></v-divider> -->
+        <div v-for="comment in coworking.comments" :key="comment.id">
           <v-divider :key="comment.id" inset></v-divider>
   
           <v-list-item :key="comment.title">
@@ -73,11 +68,8 @@
   const axios = require("axios");
   
   export default {
-    name: "ArticlePage",
-    // props: {
-    //   // msg: String
-    // },
-    // props: ['article'],
+    name: "PlacePage",
+
     created: function () {
       this.getCoworking();
       this.getRate();
@@ -95,26 +87,7 @@
           (v) =>
             (v && v.length <= 500) ||
             "Текст комментария должен быть меньше 500 символов",
-        ],
-        comments: [
-          {
-            id: 0,
-            author: {
-              name: "Димон",
-              avatar: "https://cdn.vuetifyjs.com/images/profiles/marcus.jpg",
-            },
-            text: "Удобное расположение. Тихо и малолюдно.",
-          },
-          {
-            id: 1,
-            author: {
-              name: "Виктор",
-              avatar:
-                "https://avatars0.githubusercontent.com/u/9064066?v=4&s=460",
-            },
-            text: "График работы идеально подходит. Тарифы по доступной цене.",
-          },
-        ],
+        ]
       };
     },
     methods: {

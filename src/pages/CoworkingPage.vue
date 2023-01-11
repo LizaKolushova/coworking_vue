@@ -99,39 +99,3 @@
     },
   };
   </script>
-  
-  <!-- <style lang="scss" scoped>
-  .articles {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-top: 5vh;
-    row-gap: 5vh;
-  }
-  
-  .article {
-    width: 30%;
-    &__link {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      row-gap: 1rem;
-    }
-    &__title {
-      font-size: 2rem;
-      text-align: center;
-    }
-    &__image {
-      width: 100%;
-    }
-  }
-  
-  .card{
-    &__title {
-      word-break: break-word;
-    }
-  }
-  </style> -->
-  
