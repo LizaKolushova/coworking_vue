@@ -115,14 +115,12 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// import ArticlesPage from './pages/ArticlesPage.vue'
+
 
 export default {
   name: "App",
   components: {
     // HelloWorld
-    // ArticlesPage,
   },
 };
 </script>
