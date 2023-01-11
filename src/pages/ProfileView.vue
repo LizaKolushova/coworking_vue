@@ -17,10 +17,10 @@
           <v-col class="py-0">
             <v-list-item dark>
               <v-list-item-content>
-                <v-list-item-title class="text-h6">
+                <v-list-item-title class="text-h6 black--text" color="teal darken-4">
                   {{ user.name }}
                 </v-list-item-title>
-                <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
+                <v-list-item-subtitle class="black--text">{{ user.email }}</v-list-item-subtitle>
 
                 <v-dialog v-model="dialogEditProfile" max-width="600px">
                   <template v-slot:activator="{ on, attrs }">
@@ -90,9 +90,9 @@ export default {
   data: function () {
     return {
       user: {
-        name: "Виктор",
-        avatar: "https://avatars0.githubusercontent.com/u/9064066?v=4&s=460",
-        email: "victor@gmail.com",
+        name: "Елизавета",
+        avatar: "./images/photo.jpg",
+        email: "taeknork@gmail.com",
       },
       dialogEditProfile: false,
       rules: {
