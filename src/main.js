@@ -18,6 +18,7 @@ import loginPage from './pages/LoginPage.vue'
 import profileView from './pages/ProfileView.vue'
 import aboutUs from './pages/AboutUs.vue'
 
+
 Vue.config.productionTip = false
 
 const routes = [

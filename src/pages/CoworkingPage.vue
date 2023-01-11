@@ -5,12 +5,14 @@
             <v-col
                 class="d-flex"
             >
-                <v-btn
-                color="teal lighten-4"
-                elevation="2"
-                large
-                x-large
-                > Отсортировать по стоимости</v-btn>
+           <v-select
+                :items="sortRules"
+                item-text="title"
+                item-value="key"
+                label="Сортировка"
+                solo
+                l-large
+                > </v-select>
             </v-col>
             <v-col
                 class="d-flex"
@@ -19,7 +21,13 @@
                 :items="items"
                 label="Станции метро"
                 solo
+                l-large
                 ></v-select>
+            </v-col>
+            <v-col
+                class="d-flex"
+            >
+             <v-btn color="teal lighten-2" x-large class="white--text" @click="clear"> Сбросить фильтры</v-btn>
             </v-col>
 
         </v-row>
@@ -28,7 +36,7 @@
                 <v-card
                     class="mx-auto card d-flex"
                     width="25rem"
-                    v-for="place in coworking"
+                    v-for="place in coworkings"
                     :key="place.id"
                     style="margin-bottom: 14px"
                 >
@@ -69,6 +77,7 @@
   </template>
   
   <script>
+  import _ from 'lodash'
   const axios = require("axios");
   
   export default {
@@ -81,21 +90,87 @@
     },
     data: function () {
       return {
-        coworking: [],
+        coworkings: [],
+        metro: [],
+        sortRules: [
+            { key :'good_id:asc', title: 'По порядку' },
+            { key :'price:asc', title: 'По цене, сначала дешевые' },
+            { key :'price:desc', title: 'По цене, сначала дорогие' }
+        ],
         items: ['Кунцевская', 'Калужская', 'Ботанический Сад', 'Белорусская'],
+        selectMetro: 0,
+        minPrice: 0,
+        maxPrice: 0,
+        selectSort: 'good_id:asc'
       };
+    },
+    computed: {
+        filteredCoworking: function() {
+            // Фильтруем товары
+            var filtered = this.coworkings
+                // По Метро
+                .filter(coworking => {
+                    return this.selectMetro == 0 || coworking.metro== this.selectMetro;
+                })
+
+                // По ценам
+                .filter(coworking => {
+                    return Number(coworking.price) >= this.minPrice && Number(coworking.price) <= this.maxPrice;
+                })
+
+            // Сортируем
+            var sorted = _.sortBy(filtered, coworking => {
+                return Number(coworking[this.sortKey]);
+            });
+
+            // При необходимости сортируем в обратном направлении
+            if (this.sortDir === 'desc') {
+                sorted = sorted.reverse();
+            }
+
+            return sorted;
+        },
+        sortKey: function() {
+            return this.selectSort.split(':')[0];
+        },
+        sortDir: function() {
+            return this.selectSort.split(':')[1];
+        }
+    },
+    mounted: function() {
+        axios
+            .get("/coworking.json")
+            .then(response => {
+                this.coworkings = response.data;
+                this.metro = response.data.metro;
+                this.minPrice = this.getMinPrice();
+                this.maxPrice = this.getMaxPrice();
+            });
     },
     methods: {
         coworkingList: function () {
         axios
           .get("/coworking.json")
           .then((response) => {
-            this.coworking = response.data;
+            this.coworkings = response.data;
           })
           .catch(function (error) {
             console.log(error);
           });
       },
+        getMinPrice: function() {
+            return Number(_.minBy(this.coworkings, 'price').price);
+        },
+        getMaxPrice: function() {
+            return Number(_.maxBy(this.coworkings, 'price').price);
+        },
+        clear: function() {
+            this.selectMetro = 0;
+            this.minPrice = this.getMinPrice();
+            this.maxPrice = this.getMaxPrice();
+            this.selectSort = 'good_id:asc';
+        }
     },
+
   };
   </script>
